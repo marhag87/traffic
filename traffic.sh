@@ -48,4 +48,4 @@ while :; do
     shift
 done
 
-clewarecontrol -c 1 -d 903327 -as 2 $green -as 1 $yellow -as 0 $red > /dev/null
+/usr/local/bin/clewarecontrol -c 1 -d 903327 -as 2 $green -as 1 $yellow -as 0 $red > /dev/null
