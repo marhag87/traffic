@@ -27,7 +27,7 @@ hosts_unreachable = status.get('num_hosts_unreachable')
 hosts_up = status.get('num_hosts_up')
 
 hosts_handled = (hosts_acked + hosts_downtime)
-hosts_bad_state = (hosts_down + hosts_pending + hosts_unreachable)
+hosts_bad_state = (hosts_down + hosts_unreachable)
 
 services_acked = status.get('num_services_acknowledged')
 services_crit = status.get('num_services_critical')
@@ -40,7 +40,7 @@ services_unreachable = status.get('num_services_unreachable')
 services_warn = status.get('num_services_warning')
 
 services_handled = (services_acked + services_downtime)
-services_bad_state = (services_warn + services_crit + services_pending + services_unknown + services_unreachable)
+services_bad_state = (services_warn + services_crit + services_unknown + services_unreachable)
 
 if (services_bad_state > services_handled) or (hosts_bad_state > hosts_handled):
     call([config.get('traffic'), '-r'])
