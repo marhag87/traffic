@@ -1,4 +1,5 @@
 #!/bin/env python3
+import sys
 import os
 from subprocess import call
 import requests
@@ -7,14 +8,18 @@ from pyyamlconfig import load_config
 
 config = load_config(os.path.expanduser('~/.config/icinga_status.yaml'))
 
-response = requests.get(
-    f'{config.get("url")}/v1/status/CIB',
-    auth=(
-        config.get('user'),
-        config.get('pass'),
-    ),
-    verify=False,
-)
+try:
+    response = requests.get(
+        f'{config.get("url")}/v1/status/CIB',
+        auth=(
+            config.get('user'),
+            config.get('pass'),
+        ),
+        verify=False,
+    )
+except:
+    call([config.get('traffic'), '-r'])
+    sys.exit(1)
 
 results = response.json().get('results', [])[0]
 status = results.get('status', {})
